@@ -230,23 +230,28 @@ void topsort() {
 }
 
 
-//2.1.6 2-SAT(待补完)
-int solve[maxn];//存每个变量的取值
+//2.1.6 2-SAT
 int vis[maxn];
+int c[maxn];//存每个变量所在强联通分量序号
+int opp[maxn];//存每个变量取值的另一值
+int val[maxn];//存每个变量的取值
 bool two_sat() {
 	for (int i = 1; i <= 2 * n; ++i)
 		if (!dfn[i]) tarjan(i);
-	for (int i = 1; i <= N; ++i) {
-		int j = i + N;
+	for (int i = 1; i <= n; ++i) {
+		int j = i + n;
 		if (c[i] == c[j])return false;
+		opp[i] = i + n;
+		opp[i + n] = i;
 	}
-	//……
+	for (int i = 1; i <= 2 * n; ++i)//tarjan算法得到的SCC编号本来就满足缩点后的有向无环图中自底向上的拓扑序
+		val[i] = c[i] > c[opp[i]];
 }
 int main() {
 	int i, p, j, q;
 	while (~scanf_s("%d%d%d%d", &i, &p, &j, &q)) { //若i赋值p，则j赋值q   p,q属于{0,1}  有N个变量
-		add(i + p * N, j + q * N);
-		add(j + (1 - q) * N, i + (1 - p) * N);
+		add(i + p * n, j + q * n);
+		add(j + (1 - q) * n, i + (1 - p) * n);
 	}
 	two_sat();
 }
