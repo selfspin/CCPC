@@ -1,4 +1,4 @@
-//#pragma comment(linker,"/STACK:1024000000,1024000000") 
+ï»¿//#pragma comment(linker,"/STACK:1024000000,1024000000") 
 #include<algorithm>
 #include<bitset>
 #include<cmath>
@@ -23,16 +23,16 @@ const int N = 1000010;
 
 char s[N];
 int n, sa[N], rk[N];
-//sa[i]:ËùÓĞºó×ºÅÅĞòºóµÚiĞ¡µÄºó×ºµÄ±àºÅ
-//rk[i]:±íÊ¾ºó×ºiµÄÅÅÃû¡£
+//sa[i]:æ‰€æœ‰åç¼€æ’åºåç¬¬iå°çš„åç¼€çš„ç¼–å·
+//rk[i]:è¡¨ç¤ºåç¼€içš„æ’åã€‚
 int oldrk[N << 1], id[N], px[N], cnt[N];
-//px[i] = rk[id[i]]£¨ÓÃÓÚÅÅĞòµÄÊı×éËùÒÔ½Ğ px£©
+//px[i] = rk[id[i]]ï¼ˆç”¨äºæ’åºçš„æ•°ç»„æ‰€ä»¥å« pxï¼‰
 
 bool cmp(int x, int y, int w) {
     return oldrk[x] == oldrk[y] && oldrk[x + w] == oldrk[y + w];
 }
 
-//±¶Ôö »ùÊıÅÅĞò ¼ÆÊıÅÅĞò
+//å€å¢ åŸºæ•°æ’åº è®¡æ•°æ’åº
 
 int main() {
     int i, m = 300, p, w;
@@ -43,7 +43,7 @@ int main() {
     for (i = 1; i <= m; ++i) cnt[i] += cnt[i - 1];
     for (i = n; i >= 1; --i) sa[cnt[rk[i]]--] = i;
 
-    for (w = 1; w < n; w <<= 1, m = p) {  // m=p ¾ÍÊÇÓÅ»¯¼ÆÊıÅÅĞòÖµÓò
+    for (w = 1; w < n; w <<= 1, m = p) {  // m=p å°±æ˜¯ä¼˜åŒ–è®¡æ•°æ’åºå€¼åŸŸ
         for (p = 0, i = n; i > n - w; --i) id[++p] = i;
         for (i = 1; i <= n; ++i)
             if (sa[i] > w) id[++p] = sa[i] - w;
