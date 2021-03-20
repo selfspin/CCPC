@@ -53,8 +53,8 @@ void ask(int p, int l, int r) { //ask(1, l, r)
 	if (l <= t[p].l && r >= t[p].r) return t[p].dat;
 	int mid = (t[p].l + t[p].r) >> 1;
 	int val = 0;
-	if (l <= mid) val += ask(p << 1, l, r));
-	if (r > mid) val += ask(p << 1 | 1, l, r));
+	if (l <= mid) val += ask(p << 1, l, r);
+	if (r > mid) val += ask(p << 1 | 1, l, r);
 	return val;
 }
 
@@ -96,7 +96,7 @@ void spread(int p) { //下传懒标记
 }
 
 void change(int p, int l, int r, int d) { //区间修改
-	if (l >= l(p) && r >= r(p)) {
+	if (l <= l(p) && r >= r(p)) {
 		sum(p) += d * (r(p) - l(p) + 1);
 		add(p) += d;
 		return;
@@ -113,7 +113,7 @@ void ask(int p, int l, int r) {
 	spread(p);
 	int mid = (l(p) + r(p)) >> 1;
 	int val = 0;
-	if (l <= mid) val += ask(p << 1, l, r));
-	if (r > mid) val += ask(p << 1 | 1, l, r));
+	if (l <= mid) val += ask(p << 1, l, r);
+	if (r > mid) val += ask(p << 1 | 1, l, r);
 	return val;
 }
