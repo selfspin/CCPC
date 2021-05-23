@@ -53,7 +53,7 @@ void dfs2(int u, int t) { //划分重链，找出dfs序
     w[tim] = v[u];
     if (!son[u]) return;
     dfs2(son[u], t);
-    for (int i = Head[u]; ~i; i = Edge[i].next) {
+    for (int i = head[u]; i; i = nxt[i]) {
         int v = ver[i];
         if (v == fa[u] || v == son[u])
             continue;
